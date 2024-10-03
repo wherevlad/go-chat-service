@@ -1,8 +1,5 @@
 LOCAL_BIN:=$(CURDIR)/bin
 
-install-golangci-lint:
-	GOBIN=$(LOCAL_BIN) go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.61.0
-
 lint:
 	GOBIN=$(LOCAL_BIN) golangci-lint run ./... --config .golangci.pipeline.yaml
 
@@ -25,3 +22,6 @@ generate-chat-api:
 	--go-grpc_out=pkg/chat/v1 --go-grpc_opt=paths=source_relative \
 	--plugin=protoc-gen-go-grpc=bin/protoc-gen-go-grpc \
 	api/chat/v1/chat.proto
+
+build:
+	GOOS=linux GOARCH=amd64 go build -o service_linux cmd/server/main.go
