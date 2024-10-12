@@ -10,5 +10,6 @@ FROM alpine:latest
 
 WORKDIR /root/
 COPY --from=builder /github.com/wherevlad/go-chat-service/source/bin/crud_server .
+COPY --from=builder /github.com/wherevlad/go-chat-service/source/.env.example .env
 
 CMD ["./crud_server"]
